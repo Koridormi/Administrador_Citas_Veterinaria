@@ -1,7 +1,8 @@
 import {citaObject,editando} from "./variables.js";
-import {Notificacion} from "./Classes/Notification.js";
-import {AdminCitas} from "./Classes/AdminCitas.js";
+import {Notificacion} from "./Classes/notification.js";
+import {AdminCitas} from "./Classes/adminCitas.js";
 import {formulario,formularioInput,pacienteInput,propietarioInput,emailInput,telefonoInput,fechaInput,sintomasInput} from "./selectors.js";
+import {DB} from "./IndexedDB/indexedDB.js";
 
 const citas = new AdminCitas();
 
@@ -27,6 +28,13 @@ function submitCita(event) {
         })
     } else {
         citas.agregar({...citaObject});
+        // indexedDB
+        const transaction = DB.transaction(['citas'], 'readwrite');
+        const objectStore = transaction.objectStore('citas');
+        objectStore.add(citaObject);
+        transaction.oncomplete = function() {
+            console.log('Cita agregada');
+        }
         new Notificacion({
             texto : 'Paciente Registrado',
             tipo : 'exito'
