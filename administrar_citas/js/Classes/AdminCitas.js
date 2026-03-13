@@ -1,37 +1,7 @@
-import {contenedorCitas} from "../selectors.js";
-import {cargarEdicion} from "../functions.js";
+///
 
-// function AdminCitas
-class AdminCitas {
-    constructor() {
-        this.citas = [];
-    }
-    agregar(cita) {
-        this.citas = [...this.citas,cita];
-        this.mostrar();
-    }
-    editar(citaActualizada) {
-        this.citas = this.citas.map(cita => cita.id === citaActualizada.id ? citaActualizada : cita);
-        this.mostrar();
-    }
-    eliminar(id) {
-        this.citas = this.citas.filter(cita => cita.id !== id);
-        this.mostrar();
-    }
 
-    mostrar() {
-        // limpiar HTML
-        while(contenedorCitas.firstChild) {
-            contenedorCitas.removeChild(contenedorCitas.firstChild);
-        }
-        // comprobar si hay citas
-        if(this.citas.length === 0) {
-            contenedorCitas.innerHTML = `<p class="text-xl mt-5 mb-10 text-center">No Hay Pacientes</p>`;
-            return;
-        }
-        // generando citas
-        this.citas.forEach(cita => {
-            const divCita = document.createElement('div');
+const divCita = document.createElement('div');
             divCita.classList.add('mx-5', 'my-10', 'bg-white', 'shadow-md', 'px-5', 'py-10' ,'rounded-xl', 'p-3');
 
             const paciente = document.createElement('p');
@@ -83,9 +53,3 @@ class AdminCitas {
             divCita.appendChild(sintomas);
             divCita.appendChild(contenedorBotones);
             contenedorCitas.appendChild(divCita);
-        });
-    }
-};
-
-
-export {AdminCitas};

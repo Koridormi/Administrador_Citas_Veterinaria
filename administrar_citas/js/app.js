@@ -1,5 +1,5 @@
 import {pacienteInput,propietarioInput,emailInput,telefonoInput,fechaInput,sintomasInput,formulario} from "./selectors.js";
-import {datosCita,submitCita} from "./functions.js";
+import {datosCita,submitCita} from "./IndexedDB/indexedDB.js";
 import {crearDB} from "./IndexedDB/indexedDB.js";
 
 // window load
